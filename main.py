@@ -1,23 +1,3 @@
-"""
-Para el Luis del futuro...
-Debes tener ffmpeg o algo así, se descarga y se instala. Luego se agrega a la PATH para que se pueda invocar desde cualquier lugar
-Luego instala Python y pip, más tarde instala youtube_dl con:
-    pip install --upgrade youtube-dl
-
-Ahora que lo tienes, ya puedes descargar una canción con:
-
-    youtube-dl --extract-audio --audio-format mp3 url_youtube_aquí
-
-Se puede buscar también, que es lo bueno para cuando no tenemos el link. Así:
-    youtube-dl --extract-audio --audio-format mp3 "ytsearch1:aquí tu búsqueda"
-
-    En este caso ytsearch1 va a descargar el primer resultado. ytsearch2 descargaría 2 resultados, y así
-
-Finalmente se puede renombrar la salida:
-    youtube-dl --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3 "ytsearch1:la búsqueda aquí"
-
-Más información: https://askubuntu.com/questions/643286/can-i-download-videos-from-a-youtube-search-query-using-youtube-dl
-"""
 from subprocess import check_output
 import argparse
 import time
