@@ -54,7 +54,7 @@ with open(archivo) as lista:
             nombre_salida = directorio + "/" + linea_sin_salto
         else:
             nombre_salida = linea_sin_salto
-        nombre_salida = nombre_salida + ".mp3"
+        nombre_salida = nombre_salida + ".%(ext)s"
 
         print("Buscando '{}'... ".format(busqueda), end="")
         comando = """youtube-dl --output \"""" + nombre_salida + \
