@@ -65,7 +65,7 @@ Finalmente se puede renombrar la salida:
 
   
 
-Más información: 
+# Más información: 
 
 https://askubuntu.com/questions/643286/can-i-download-videos-from-a-youtube-search-query-using-youtube-dl
 
