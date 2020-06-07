@@ -47,6 +47,8 @@ parser.add_argument(
     "archivo", help="El archivo que contiene la lista de canciones o canciones y artista")
 parser.add_argument("--artista", type=str,
                     help="Si está presente, se descargarán las canciones de 'archivo' de ese artista; si no, se descargarán tal y como están en el archivo")
+parser.add_argument("--con-numero",
+                    help="Si se indica, se agrega el número de canción (de acuerdo a la lista) al inicio del nombre. Debes indicar en qué número empieza")
 argumentos = parser.parse_args()
 
 artista = ""
@@ -58,7 +60,7 @@ if argumentos.artista:
     print("OK, todas las canciones en {} son del artista {}".format(archivo, artista))
     print("Creando directorio de artista...")
     crear_directorio_si_no_existe("./" + artista)
-    directorio = "./"+argumentos.artista
+    directorio = "./" + argumentos.artista
     nombre_salida = "\"%(title)s.%(ext)s\""
 tiempo_inicio = time.time()
 contador = 0
@@ -73,11 +75,19 @@ with open(archivo) as lista:
             nombre_salida = linea_sin_salto
         nombre_salida = nombre_salida + ".%(ext)s"
 
+        if argumentos.con_numero:
+            numero = str(int(argumentos.con_numero) + contador)
+            nombre_salida = numero + "-" + nombre_salida
         print("Buscando '{}'... ".format(busqueda), end="")
         comando = """youtube-dl --output \"""" + nombre_salida + \
-            """\" --extract-audio --audio-format mp3 \"ytsearch1:{}\"""".format(
-                busqueda)
-        check_output(comando)
+                  """\" --extract-audio --audio-format mp3 \"ytsearch1:{}\"""" \
+                      .format(busqueda)
+        try:
+            check_output(comando)
+        except FileNotFoundError:
+            print(
+                "FileNotFoundError. ¿Está instalado youtube_dl? Se puede instalar con:\npip install --upgrade youtube_dl")
+            exit()
         print("[OK]")
         contador = contador + 1
 tiempo_transcurrido = time.time() - tiempo_inicio
